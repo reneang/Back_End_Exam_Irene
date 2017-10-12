@@ -16,3 +16,12 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::group(['prefix' => 'unit'], function() {
+    Route::get('/getallunit', function(){
+        $getallunit = DB::table('unit_rumahs')->get(); // Query Builder
+        return response()->json($getallunit, 200);
+    });
+    Route::post('/createunit', 'ProductController@CreateUnit');
+    Route::post('/deleteunit', 'ProductController@DeleteUnit');
+});
